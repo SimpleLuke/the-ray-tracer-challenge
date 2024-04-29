@@ -6,7 +6,7 @@
 /*   By: llai <llai@student.42london.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:47:43 by llai              #+#    #+#             */
-/*   Updated: 2024/04/29 21:07:08 by llai             ###   ########.fr       */
+/*   Updated: 2024/04/29 21:50:44 by llai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,19 @@ t_matrix	identity_matrix(t_matrix m)
 	t_matrix res = matrix_multiply(m, i);
 	free_matrix(i);
 	return (res);
+}
+
+t_matrix init_identitymatrix(int size) {
+    t_matrix mat = create_matrix(size, size);
+
+    // Initialize the matrix as an identity matrix
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            mat.data[i][j] = (i == j) ? 1.0 : 0.0;
+        }
+    }
+
+    return mat;
 }
 
 t_tuple matrix_tuple_multiply(t_matrix A, t_tuple b)

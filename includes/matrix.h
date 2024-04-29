@@ -6,7 +6,7 @@
 /*   By: llai <llai@student.42london.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:45:55 by llai              #+#    #+#             */
-/*   Updated: 2024/04/29 18:36:09 by llai             ###   ########.fr       */
+/*   Updated: 2024/04/29 22:13:50 by llai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ bool		compare_matrix(t_matrix mat1, t_matrix mat2);
 t_matrix	matrix_multiply(t_matrix A, t_matrix B);
 t_tuple		matrix_tuple_multiply(t_matrix A, t_tuple b);
 t_matrix	identity_matrix(t_matrix m);
+t_matrix	init_identitymatrix(int size);
 t_matrix	transpose(t_matrix A);
 // double		determinant_2x2(t_matrix mat);
 double		determinant(t_matrix M);
@@ -38,4 +39,12 @@ double		minor(t_matrix A, int row, int col);
 double		cofactor(t_matrix A, int row, int col);
 t_matrix	inverse(t_matrix M);
 
+
+// matrix_transform.c
+t_matrix translation(double x, double y, double z);
+t_matrix scaling(double x, double y, double z);
+t_matrix rotation_x(double theta);
+t_matrix rotation_y(double theta);
+t_matrix rotation_z(double theta);
+t_matrix shearing(double xy, double xz, double yx, double yz, double zx, double zy);
 #endif // !MATRIX_H

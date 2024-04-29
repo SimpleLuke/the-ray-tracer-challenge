@@ -6,7 +6,7 @@
 /*   By: llai <llai@student.42london.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 13:43:24 by llai              #+#    #+#             */
-/*   Updated: 2024/04/29 21:06:08 by llai             ###   ########.fr       */
+/*   Updated: 2024/04/29 22:27:08 by llai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/minirt.h"
@@ -204,6 +204,90 @@ void	test7(void)
 	print_matrix(res);
 }
 
+void	test8(void)
+{
+	// t_tuple	p = point(-3, 4, 5);
+	t_tuple	v = vector(-3, 4, 5);
+	t_matrix	t = translation(5, -3, 2);
+	
+	// t = inverse(t);
+
+	t_tuple	res = matrix_tuple_multiply(t, v);
+	print_tuple(res);
+}
+
+void	test9(void)
+{
+	// t_tuple p = point(2, 3, 4);
+	t_tuple v = vector(-4, 6, 8);
+	t_matrix t = scaling(2, 3, 4);
+
+	t = inverse(t);
+	t_tuple res = matrix_tuple_multiply(t, v);
+	print_tuple(res);
+}
+
+void	test10(void)
+{
+	t_tuple	p = point(0, 1, 0);
+
+	t_matrix	t = rotation_x(M_PI / 4);
+	t = inverse(t);
+	t_tuple res = matrix_tuple_multiply(t, p);
+	print_tuple(res);
+}
+
+void	test11(void)
+{
+	t_tuple	p = point(0, 0, 1);
+
+	t_matrix	t = rotation_y(M_PI / 4);
+	t_tuple res = matrix_tuple_multiply(t, p);
+	print_tuple(res);
+}
+
+void	test12(void)
+{
+	t_tuple	p = point(0, 1, 0);
+
+	t_matrix	t = rotation_z(M_PI / 4);
+	t_tuple res = matrix_tuple_multiply(t, p);
+	print_tuple(res);
+}
+
+void	test13(void)
+{
+	t_tuple	p = point(2, 3, 4);
+
+	t_matrix	t = shearing(0, 1, 0, 0, 0, 0);
+	t_tuple res = matrix_tuple_multiply(t, p);
+	print_tuple(res);
+}
+
+void	print_clock(t_data *data)
+{
+	// double radius = 100.0;
+	t_tuple	p = point(0, 0, 0);
+
+    // Calculate the angle between each hour (in radians)
+    double hourAngle = 2 * M_PI / 12;
+
+    // Apply transformations for each hour
+    for (int hour = 0; hour < 12; hour++) {
+        // Calculate the rotation angle for the current hour
+        double angle = hour * hourAngle;
+
+        // Create the rotation matrix for the current hour
+        t_matrix rotation = rotation_z(angle);
+		t_matrix translate = translation(0, 100, 0);
+
+        // Transform the center point using the rotation matrix
+        t_tuple rotatedPoint = matrix_tuple_multiply(rotation, matrix_tuple_multiply(translate, p));
+		print_tuple(rotatedPoint);
+		put_pixel(data->base_image, rotatedPoint.x, rotatedPoint.y, color(0, 1, 0, 0));
+	}
+}
+
 int	main(void)
 {
 	t_data	data;
@@ -227,9 +311,18 @@ int	main(void)
 	// test4();
 	// test5();
 	// test6();
-	test7();
+	// test7();
+	// test8();
+	// test9();
+	// test10();
+	// test11();
+	// test12();
+	// test13();
+	// print_clock(&data);
+
 
 	put_pixel(data.base_image, 0, 0, color(0, 1, 0, 0));
+
 	mlx_put_image_to_window(data.base_image.win.mlx,
 		data.base_image.win.win_ptr, data.base_image.img_ptr, 0, 0);
 	mlx_hook(win.win_ptr, 2, 1L << 0, esc_close_win, &data);
