@@ -6,7 +6,7 @@
 /*   By: llai <llai@student.42london.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 13:55:55 by llai              #+#    #+#             */
-/*   Updated: 2024/04/29 14:53:58 by llai             ###   ########.fr       */
+/*   Updated: 2024/04/29 17:27:06 by llai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,4 +116,9 @@ t_tuple	cross(t_tuple v1, t_tuple v2)
 	res.z = v1.x * v2.y - v1.y * v2.x;
 	res.w = VECTOR;
 	return (res);
+}
+
+void	print_tuple(t_tuple t)
+{
+	printf("tuple: x:%.2f y:%.2f z:%.2f w:%d\n", t.x, t.y, t.z, t.w);
 }
