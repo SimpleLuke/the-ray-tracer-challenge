@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.c                                              :+:      :+:    :+:   */
+/*   ray.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llai <llai@student.42london.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 22:32:54 by llai              #+#    #+#             */
-/*   Updated: 2024/04/29 23:06:40 by llai             ###   ########.fr       */
+/*   Created: 2024/04/29 22:31:07 by llai              #+#    #+#             */
+/*   Updated: 2024/04/29 22:41:30 by llai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ray.h"
+#ifndef RAY_H
+#define RAY_H
 
+#include "tuples.h"
 
-t_ray	ray(t_tuple origin, t_tuple direction)
+typedef struct s_ray
 {
-	t_ray r;
+	t_tuple	origin;
+	t_tuple	direction;
+}	t_ray;
 
-	r.origin = origin;
-	r.direction = direction;
-	return (r);
-}
+t_ray	ray(t_tuple origin, t_tuple direction);
+t_tuple	position(t_ray ray, double t);
 
-t_tuple	position(t_ray ray, double t)
-{
-	return (add_tuples(ray.origin, (scalar_mul_tuple(t, ray.direction))));
-}
+#endif // !RAY_H

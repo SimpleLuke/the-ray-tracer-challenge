@@ -6,7 +6,7 @@
 /*   By: llai <llai@student.42london.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 13:49:48 by llai              #+#    #+#             */
-/*   Updated: 2024/04/29 17:09:31 by llai             ###   ########.fr       */
+/*   Updated: 2024/04/29 23:07:05 by llai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include "tuples.h"
 # include "color.h"
 # include "matrix.h"
+# include "ray.h"
+# include "shapes.h"
 // # include "vec3.h"
 // # include "shape.h"
 // # include "light.h"

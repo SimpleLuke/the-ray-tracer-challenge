@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.c                                              :+:      :+:    :+:   */
+/*   shapes.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llai <llai@student.42london.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 22:32:54 by llai              #+#    #+#             */
-/*   Updated: 2024/04/29 23:06:40 by llai             ###   ########.fr       */
+/*   Created: 2024/04/29 22:55:50 by llai              #+#    #+#             */
+/*   Updated: 2024/04/29 23:06:37 by llai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ray.h"
+#ifndef SHAPES_H
+# define SHAPES_H
 
+#include "tuples.h"
+#include "ray.h"
 
-t_ray	ray(t_tuple origin, t_tuple direction)
+typedef struct s_tuple_list
 {
-	t_ray r;
+	int		count;
+	double	t1;
+	double	t2;
+}	t_tuple_list;
 
-	r.origin = origin;
-	r.direction = direction;
-	return (r);
-}
-
-t_tuple	position(t_ray ray, double t)
+typedef struct s_shpere
 {
-	return (add_tuples(ray.origin, (scalar_mul_tuple(t, ray.direction))));
-}
+	t_tuple	center;
+	double	radius;
+}	t_shpere;
+
+t_shpere	shpere(t_tuple center, double radius);
+t_tuple_list intersect(t_shpere sphere, t_ray ray);
+
+#endif // !SHAPES_H

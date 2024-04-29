@@ -6,7 +6,7 @@
 /*   By: llai <llai@student.42london.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 13:43:24 by llai              #+#    #+#             */
-/*   Updated: 2024/04/29 22:27:08 by llai             ###   ########.fr       */
+/*   Updated: 2024/04/29 23:10:19 by llai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/minirt.h"
@@ -288,6 +288,40 @@ void	print_clock(t_data *data)
 	}
 }
 
+void	test14(void)
+{
+	t_ray r = ray(point(1, 2, 3), vector(4, 5, 6));
+	print_tuple(r.origin);
+	print_tuple(r.direction);
+}
+
+void	test15(void)
+{
+	t_ray	r = ray(point(2, 3, 4), vector(1, 0, 0));
+	print_tuple(position(r, 0));
+	print_tuple(position(r, 1));
+	print_tuple(position(r, -1));
+	print_tuple(position(r, 2.5));
+}
+
+void	test16(void)
+{
+	t_ray	r = ray(point(0, 0, -5), vector(0, 0, 1));
+	t_shpere	s = shpere(point(0, 0, 0), 1);
+	t_tuple_list xs = intersect(s, r);
+
+	printf("xs: count: %d 0: %f 1:%f\n", xs.count, xs.t1, xs.t2);
+}
+
+void	test17(void)
+{
+	t_ray	r = ray(point(0, 1, -5), vector(0, 0, 1));
+	t_shpere	s = shpere(point(0, 0, 0), 1);
+	t_tuple_list xs = intersect(s, r);
+
+	printf("xs: count: %d 0: %f 1:%f\n", xs.count, xs.t1, xs.t2);
+}
+
 int	main(void)
 {
 	t_data	data;
@@ -319,7 +353,10 @@ int	main(void)
 	// test12();
 	// test13();
 	// print_clock(&data);
-
+	// test14();
+	// test15();
+	// test16();
+	test17();
 
 	put_pixel(data.base_image, 0, 0, color(0, 1, 0, 0));
 
