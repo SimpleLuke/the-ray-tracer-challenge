@@ -6,7 +6,7 @@
 /*   By: llai <llai@student.42london.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 13:43:24 by llai              #+#    #+#             */
-/*   Updated: 2024/04/29 23:10:19 by llai             ###   ########.fr       */
+/*   Updated: 2024/04/29 23:40:37 by llai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/minirt.h"
@@ -304,22 +304,30 @@ void	test15(void)
 	print_tuple(position(r, 2.5));
 }
 
-void	test16(void)
-{
-	t_ray	r = ray(point(0, 0, -5), vector(0, 0, 1));
-	t_shpere	s = shpere(point(0, 0, 0), 1);
-	t_tuple_list xs = intersect(s, r);
-
-	printf("xs: count: %d 0: %f 1:%f\n", xs.count, xs.t1, xs.t2);
-}
+// void	test16(void)
+// {
+// 	t_ray	r = ray(point(0, 0, -5), vector(0, 0, 1));
+// 	t_shpere	s = shpere(point(0, 0, 0), 1);
+// 	// t_tuple_list xs = intersect(s, r);
+//
+// 	printf("xs: count: %d 0: %f 1:%f\n", xs.count, xs.t1, xs.t2);
+// }
 
 void	test17(void)
 {
-	t_ray	r = ray(point(0, 1, -5), vector(0, 0, 1));
+	t_ray	r = ray(point(0, 0, -5), vector(0, 0, 1));
 	t_shpere	s = shpere(point(0, 0, 0), 1);
-	t_tuple_list xs = intersect(s, r);
+	// t_tuple_list xs = intersect(s, r);
+	t_list *xs = intersect(s, r);
 
-	printf("xs: count: %d 0: %f 1:%f\n", xs.count, xs.t1, xs.t2);
+	// printf("xs: count: %d 0: %f 1:%f\n", xs.count, xs.t1, xs.t2);
+	printf("count: %d\n",ft_lstsize(xs));
+	while (xs != NULL)
+	{
+		t_intersection	*i = xs->content;
+		printf("t: %f\n", i->t);
+		xs = xs->next;
+	}
 }
 
 int	main(void)

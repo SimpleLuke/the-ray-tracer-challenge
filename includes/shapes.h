@@ -6,7 +6,7 @@
 /*   By: llai <llai@student.42london.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 22:55:50 by llai              #+#    #+#             */
-/*   Updated: 2024/04/29 23:06:37 by llai             ###   ########.fr       */
+/*   Updated: 2024/04/29 23:35:34 by llai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "tuples.h"
 #include "ray.h"
+#include "../libft/libft.h"
 
 typedef struct s_tuple_list
 {
@@ -29,7 +30,14 @@ typedef struct s_shpere
 	double	radius;
 }	t_shpere;
 
+typedef struct s_intersection
+{
+	double		t;
+	t_shpere	object;
+}	t_intersection;
+
 t_shpere	shpere(t_tuple center, double radius);
-t_tuple_list intersect(t_shpere sphere, t_ray ray);
+// t_tuple_list intersect(t_shpere sphere, t_ray ray);
+t_list *intersect(t_shpere sphere, t_ray ray);
 
 #endif // !SHAPES_H
