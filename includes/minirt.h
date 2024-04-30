@@ -6,7 +6,7 @@
 /*   By: llai <llai@student.42london.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 13:49:48 by llai              #+#    #+#             */
-/*   Updated: 2024/04/29 23:07:05 by llai             ###   ########.fr       */
+/*   Updated: 2024/04/30 16:28:27 by llai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # include <stdbool.h>
 
 // # define ESC_KEY 0xff1b
-# define HEIGHT 1080
-# define WIDTH 1080
+# define HEIGHT 100
+# define WIDTH 100
 # define BG_COLOR 0x000000
 
 // typedef struct s_vec3 t_vec3;

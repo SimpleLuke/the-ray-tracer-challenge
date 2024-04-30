@@ -6,10 +6,11 @@
 /*   By: llai <llai@student.42london.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 13:43:24 by llai              #+#    #+#             */
-/*   Updated: 2024/04/29 23:40:37 by llai             ###   ########.fr       */
+/*   Updated: 2024/04/30 16:35:34 by llai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/minirt.h"
+#include <math.h>
 #include <stdio.h>
 
 void	test1(void)
@@ -316,7 +317,7 @@ void	test15(void)
 void	test17(void)
 {
 	t_ray	r = ray(point(0, 0, -5), vector(0, 0, 1));
-	t_shpere	s = shpere(point(0, 0, 0), 1);
+	t_sphere	s = sphere(point(0, 0, 0), 1);
 	// t_tuple_list xs = intersect(s, r);
 	t_list *xs = intersect(s, r);
 
@@ -327,6 +328,92 @@ void	test17(void)
 		t_intersection	*i = xs->content;
 		printf("t: %f\n", i->t);
 		xs = xs->next;
+	}
+}
+
+void	test18(void)
+{
+	t_sphere	s = sphere(point(0, 0, 0), 1);
+	t_list		*interections_list = NULL;
+
+	ft_lstadd_back(&interections_list, ft_lstnew(intersection(5, s)));
+	ft_lstadd_back(&interections_list, ft_lstnew(intersection(7, s)));
+	ft_lstadd_back(&interections_list, ft_lstnew(intersection(-3, s)));
+	ft_lstadd_back(&interections_list, ft_lstnew(intersection(2, s)));
+
+	t_intersection	*i = hit(interections_list);
+	if (i)
+		printf("res: %f\n", i->t);
+}
+
+void	test19(void)
+{
+	t_ray	r = ray(point(1, 2, 3), vector(0, 1, 0));
+	// t_matrix	m = translation(3, 4, 5);
+	t_matrix	m = scaling(2, 3, 4);
+	t_ray	r2 = transform(r, m);
+	print_tuple(r2.origin);
+	print_tuple(r2.direction);
+}
+
+void	test20(void)
+{
+	t_ray	r = ray(point(0, 0, -5), vector(0, 0, 1));
+	t_sphere	s = sphere(point(0, 0, 0), 1);
+	
+	// set_transform(&s, scaling(2, 2, 2));
+	set_transform(&s, translation(5, 0, 0));
+	t_list *xs = NULL;
+	xs = intersect(s, r);
+	int	count = ft_lstsize(xs);
+	printf("count: %d\n", count);
+	while (count > 0 && xs != NULL)
+	{
+		t_intersection	*i = xs->content;
+		printf("t: %f\n", i->t);
+		xs = xs->next;
+	}
+}
+
+void	draw_sphere(t_data *data)
+{
+	(void)data;
+	t_tuple	ray_origin = point(0, 0, -5);
+	double	wall_z = 10;
+	double	wall_size = 7;
+	double	canvas_pixel = 100;
+	double	pixel_size = wall_size / canvas_pixel;
+	// double	half = wall_size / 2;
+
+	t_sphere	s = sphere(point(0, 0, 0), 1);
+
+	for (int y = -canvas_pixel / 2; y < canvas_pixel / 2; y++)
+	{
+		double	world_y = pixel_size * y;
+		for (int x = -canvas_pixel / 2; x < canvas_pixel / 2; x++)
+		{
+			double	world_x = pixel_size * x;
+			t_tuple	position = point(world_x, world_y, wall_z);
+			// t_tuple	position = point(x, y, wall_z);
+			t_ray	r = ray(ray_origin, normalize(sub_tuples(position, ray_origin)));
+			t_list *xs = NULL;
+			// s.transform = scaling(1, 0.5, 1);
+			// s.transform = scaling(0.5, 1, 1);
+			// s.transform = matrix_multiply(rotation_z(M_PI / 4) ,scaling(0.5, 1, 1));
+			// s.transform = matrix_multiply(shearing(1, 0, 0, 0, 0, 0), scaling(0.5, 1, 1));
+			xs = intersect(s, r);
+			t_intersection	*i = hit(xs);
+			printf("x: %d, y:%d\n", x, y);
+			if (i && i->t)
+			{
+				// printf("res: %f\n", i->t);
+				put_pixel(data->base_image, x, y, color(0, 1, 0, 0));
+			}
+			else
+			{
+				put_pixel(data->base_image, x, y, color(0, 1, 1, 1));
+			}
+		}
 	}
 }
 
@@ -364,7 +451,12 @@ int	main(void)
 	// test14();
 	// test15();
 	// test16();
-	test17();
+	// test17();
+	// test18();
+	// test19();
+	// test20();
+	draw_sphere(&data);
+	
 
 	put_pixel(data.base_image, 0, 0, color(0, 1, 0, 0));
 
